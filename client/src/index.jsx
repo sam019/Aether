@@ -10,7 +10,6 @@ let it = {
   sdfsf: '123sssss'
 }
 const store = createStore(reducer, it);
-console.log(store.getState());
 render(
   <Provider store={store}>
     <App></App>
