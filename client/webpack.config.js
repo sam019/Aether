@@ -1,28 +1,29 @@
-const path = require('path');
+const autoprefixer = require('autoprefixer');
+const precss = require('precss');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src/index.jsx'),
+  entry: ['webpack/hot/only-dev-server', './src/index.jsx'],
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    path: './build',
+    filename: 'bundle.js',
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
       loader: 'babel',
-      exclude: /node_modules/
+      exclude: /node_modules/,
     }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader?modules!postcss-loader'
+      test: /\.(css|scss)$/,
+      loader: 'style!css?modules!postcss!sass',
     }, {
       test: /\.(png|jpg)$/,
-      loader: 'url-loader?limit=8192'
-    }]
+      loader: 'url?limit=8192',
+    }],
   },
   postcss() {
-    return [require('autoprefixer'), require('precss')];
+    return [autoprefixer, precss];
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
-}
+};

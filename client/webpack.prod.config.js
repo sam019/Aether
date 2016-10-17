@@ -1,24 +1,40 @@
-const path = require('path');
+const autoprefixer = require('autoprefixer');
+const precss = require('precss');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src/index.js'),
+  entry: './src/index.jsx',
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    path: './build',
+    filename: 'bundle.js',
   },
   module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'react'],
-        },
-        exclude: /node_modules/
-      }, {
-        test: /\.css$/,
-        loader: 'style!css'
-      }
-    ]
-  }
-}
+    loaders: [{
+      test: /\.jsx?$/,
+      loader: 'babel',
+      exclude: /node_modules/,
+      query: {
+        presets: ['es2015', 'react'],
+      },
+    }, {
+      test: /\.(css|scss)$/,
+      loader: 'style!css?modules!postcss!sass',
+    }, {
+      test: /\.(png|jpg)$/,
+      loader: 'url?limit=8192',
+    }],
+  },
+  postcss() {
+    return [autoprefixer, precss];
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+    }),
+  ],
+};

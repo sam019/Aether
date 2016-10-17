@@ -1,18 +1,17 @@
 import React from 'react';
-import {render} from 'react-dom';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import reducer from './reducers';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 import App from './containers/App';
 import './base.css';
-let it = {
-  name: 'llll',
-  sdfsf: '123sssss'
+/* 重要！！！ 启用热替换 */
+if (module.hot) {
+  module.hot.accept();
 }
-const store = createStore(reducer, it);
+
 render(
   <Provider store={store}>
-    <App></App>
+    <App />
   </Provider>,
   document.getElementById('root')
 );

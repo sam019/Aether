@@ -1,0 +1,26 @@
+/* 容器 */
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 18px;
+  color: #fff;
+}
+/* 头像 */
+.portrait {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+/* 用户名 */
+.user-name {
+  flex-grow: 1;
+}
+/* 选项按钮 */
+.config {
+  width: 30px;
+  height: 30px;
+  background: url(./panel.png) no-repeat center center;
+}
