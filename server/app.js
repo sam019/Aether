@@ -21,8 +21,9 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('message', message);
   });
   socket.on('disconnect', () => {
-    console.log('byebye');
+    console.log('disconnected');
     onlineCount -= 1;
+    console.log('onlineCount: ' +　onlineCount);
   });
 });
 

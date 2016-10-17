@@ -5,7 +5,6 @@ import reducers from './reducers/';
 import socket from './socket';
 
 const initialStore = fromJS({
-  isMobile: window.innerWidth < 1000,
   user: {
     name: `me${Math.round(Math.random() * 100)}`,
   },

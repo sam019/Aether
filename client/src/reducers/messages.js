@@ -1,7 +1,6 @@
 import { fromJS } from 'immutable';
 
-const initState = fromJS({});
-export default function messagesReducer(messages = initState, action) {
+export default function messagesReducer(messages = fromJS({}), action) {
   switch (action.type) {
     case 'ADD_MESSAGE': {
       const { timestamp, userName, group, type, content } = action.payload;
@@ -16,7 +15,6 @@ export default function messagesReducer(messages = initState, action) {
       }
       return messages.updateIn([group], array => array.push(message));
     }
-    default:
-      return messages;
+    default: return messages;
   }
 }

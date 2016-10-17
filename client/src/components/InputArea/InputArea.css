@@ -1,5 +1,6 @@
 /* 发送消息 */
 .wrap {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   min-height: 50px;
@@ -29,5 +30,5 @@
 }
 /* 发送图片 */
 .send-img {
-  
+
 }

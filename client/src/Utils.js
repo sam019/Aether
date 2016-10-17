@@ -3,7 +3,7 @@
  * @param  {[type]} element [description]
  * @return {[type]}         [description]
  */
-function getElementTop(element) {
+export function getElementTop(element) {
   let actualTop = element.offsetTop;
   let current = element.offsetParent;
   while (current) {
@@ -17,7 +17,7 @@ function getElementTop(element) {
  * @param  {[type]} element [description]
  * @return {[type]}         [description]
  */
-function getElementLeft(element) {
+export function getElementLeft(element) {
   let actualLeft = element.offsetLeft;
   let current = element.offsetParent;
   while (current) {
@@ -26,10 +26,3 @@ function getElementLeft(element) {
   }
   return actualLeft;
 }
-
-const Utils = {
-  getElementTop,
-  getElementLeft,
-};
-export { getElementTop, getElementLeft };
-export default Utils;

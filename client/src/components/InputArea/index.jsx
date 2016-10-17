@@ -8,11 +8,19 @@ export default class InputArea extends Component {
       content: '',
       showExpressions: false,
     };
+    // this.handleBlur = this.handleBlur.bind(this);
+    // this.handleFocus = this.handleFocus.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.switchExpressions = this.switchExpressions.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
     this.sendText = this.sendText.bind(this);
   }
+  /* handleFocus() {
+    this.setState({ focus: true });
+  } */
+  /* handleBlur() {
+    this.setState({ focus: false });
+  } */
   handleKeydown(e) {
     if (this.state.content && e.key === 'Enter') {
       this.sendText();
@@ -36,7 +44,7 @@ export default class InputArea extends Component {
   }
   render() {
     return (
-      <footer className={Styles.wrap}>
+      <footer className={Styles.wrap} >
         <input
           type="text"
           className={Styles.input}

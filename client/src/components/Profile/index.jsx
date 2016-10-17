@@ -36,7 +36,10 @@ export default class Profile extends Component {
   render() {
     return (
       <div className={Styles.card} ref={(ele) => { this.ele = ele; }}>
-        <button onClick={this.handleDisplayDetail}>
+        <button
+          onClick={this.handleDisplayDetail}
+          className={Styles.wrap}
+        >
           <img
             src=""
             alt="头像"

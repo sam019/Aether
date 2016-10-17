@@ -5,21 +5,20 @@ import sendMessage from '../actions/sendMessage';
 /* function mapStateToProps(state) {
   // todo
   return {
-    user: 'me',
-    group: 'main',
+    isMobile: state.get('isMobile'),
   };
 } */
 
-function mapDispatchToProps(dispatch) {
+/* function mapDispatchToProps(dispatch) {
   return {
     sendMessage(message) {
       dispatch(sendMessage(message));
     },
   };
-}
+} */
 
-/* const mapDispatchToProps = {
+const mapDispatchToProps = {
   sendMessage,
-}; */
+};
 
 export default connect(null, mapDispatchToProps)(InputArea);
