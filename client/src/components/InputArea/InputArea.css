@@ -1,0 +1,34 @@
+/* 发送消息 */
+.wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  border-top: 1px solid #ccc;
+}
+/* 输入框 */
+.input {
+  flex-grow: 1;
+  margin-left: 12px;
+  margin-right: 5px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 16px;
+  border: 1px groove rgb(238,238,238);
+}
+/* 按钮 */
+.switch-expressions,
+.send-text,
+.send-img {
+  width: 34px;
+  height: 34px;
+  margin: 0 5px;
+}
+/* 发送文本 */
+.send-text {
+
+}
+/* 发送图片 */
+.send-img {
+
+}

@@ -1,0 +1,26 @@
+/* 房间信息 */
+.header {
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #d6d6d6;
+}
+/* 边栏切换按钮 */
+.switchButton {
+  position: absolute;
+  top: 6.25px;
+  left: 6.25px;
+  width: 37.5px;
+  height: 37.5px;
+  background-color: yellow;
+}
+/* 名称 */
+.title {
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+}
