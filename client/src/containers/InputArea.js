@@ -9,14 +9,6 @@ import sendMessage from '../actions/sendMessage';
   };
 } */
 
-/* function mapDispatchToProps(dispatch) {
-  return {
-    sendMessage(message) {
-      dispatch(sendMessage(message));
-    },
-  };
-} */
-
 const mapDispatchToProps = {
   sendMessage,
 };

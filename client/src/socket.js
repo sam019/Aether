@@ -8,5 +8,3 @@ if (location.host === 'localhost:8080') {
 }
 const socket = io(url);
 export default socket;
-/* socket.on('message', message => {
-}); */

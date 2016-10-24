@@ -8,19 +8,11 @@ export default class InputArea extends Component {
       content: '',
       showExpressions: false,
     };
-    // this.handleBlur = this.handleBlur.bind(this);
-    // this.handleFocus = this.handleFocus.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.switchExpressions = this.switchExpressions.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
     this.sendText = this.sendText.bind(this);
   }
-  /* handleFocus() {
-    this.setState({ focus: true });
-  } */
-  /* handleBlur() {
-    this.setState({ focus: false });
-  } */
   handleKeydown(e) {
     if (this.state.content && e.key === 'Enter') {
       this.sendText();
@@ -41,8 +33,34 @@ export default class InputArea extends Component {
       content: this.state.content.trim(),
     });
     this.setState({ content: '' });
+    this.input.focus();
   }
   render() {
+    let lastButton;
+    if (this.state.content) {
+      lastButton = (
+        <input
+          type="button"
+          className={Styles['send-text']}
+          onClick={this.sendText}
+          value="发送"
+        />
+      );
+    } else {
+      lastButton = (
+        <label
+          htmlFor="file"
+          className={Styles['send-img']}
+          onClick={this.sendImg}
+        >
+          <input
+            id="file"
+            type="file"
+            style={{ display: 'none' }}
+          />
+        </label>
+      );
+    }
     return (
       <footer className={Styles.wrap} >
         <input
@@ -51,6 +69,7 @@ export default class InputArea extends Component {
           value={this.state.content}
           onChange={this.handleChange}
           onKeyDown={this.handleKeydown}
+          ref={(ele) => { this.input = ele; }}
         />
         <input
           type="button"
@@ -62,17 +81,7 @@ export default class InputArea extends Component {
             <div className={Styles.expressions}>angry</div>
           : null */
         }
-        {this.state.content ?
-          <input
-            type="button"
-            className={Styles['send-text']}
-            onClick={this.sendText}
-          />
-        : <input
-          type="button"
-          className={Styles['send-img']}
-          onClick={this.sendImg}
-        />}
+        {lastButton}
       </footer>
     );
   }

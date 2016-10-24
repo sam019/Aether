@@ -13,14 +13,11 @@ module.exports = {
       test: /\.jsx?$/,
       loader: 'babel',
       exclude: /node_modules/,
-      query: {
-        presets: ['es2015', 'react'],
-      },
     }, {
       test: /\.(css|scss)$/,
       loader: 'style!css?modules!postcss!sass',
     }, {
-      test: /\.(png|jpg)$/,
+      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)\??.*$/,
       loader: 'url?limit=8192',
     }],
   },
@@ -31,10 +28,18 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
       },
     }),
   ],
+  node: {
+    fs: 'empty',
+  },
 };

@@ -1,12 +1,12 @@
 import { browserHistory } from 'react-router';
-import getUserInfo from '../actions/getUserInfo';
+import initUserInfo from './initUserInfo';
 
-export default function longinWithoutToken({ userName, password }) {
+export default function login({ username, password }) {
   return (dispatch, getState, socket) => {
-    socket.emit('loginWithoutToken', { userName, password }, (data) => {
+    socket.emit('login', { username, password }, (data) => {
       if (data.success) {
         localStorage.setItem('token', data.token);
-        dispatch(getUserInfo(data.user));
+        dispatch(initUserInfo(data.user));
         browserHistory.push('/');
       } else {
         // todo

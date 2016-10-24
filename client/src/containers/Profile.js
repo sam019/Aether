@@ -3,7 +3,7 @@ import Profile from '../components/Profile';
 
 function mapStateToProps(state) {
   return {
-    userName: state.getIn(['user', 'name']),
+    username: state.getIn(['user', 'username']),
   };
 }
 

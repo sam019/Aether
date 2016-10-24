@@ -5,19 +5,8 @@ import reducers from './reducers/';
 import socket from './socket';
 
 const initialStore = fromJS({
-  user: {
-    name: `me${Math.round(Math.random() * 100)}`,
-  },
-  messages: {
-    main: [
-      {
-        timestamp: 123123,
-        userName: 'system',
-        content: 'hello world',
-      },
-    ],
-  },
   currentGroup: 'main',
+  showSidebar: window.innerWidth > 1024,
 });
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

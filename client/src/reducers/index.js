@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux-immutable';
-import messages from './messages';
+import groups from './groups';
+import user from './user';
+import showSidebar from './showSidebar';
 
 export default combineReducers({
-  user: user => user,
-  messages,
+  user,
+  groups,
   currentGroup: currentGroup => currentGroup,
+  showSidebar,
 });

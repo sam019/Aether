@@ -1,0 +1,27 @@
+{
+  "extends": "airbnb",
+  "installedESLint": true,
+  "plugins": [
+    "html",
+    "react",
+    "jsx-a11y",
+    "import"
+  ],
+  "env": {
+    "node": true,
+    "jquery": true,
+    "es6": true,
+    "browser": true
+  },
+  "fix": true,
+  "rules": {
+    "jsx-a11y/no-static-element-interactions": "off",
+    "react/no-unused-prop-types": [2, { "skipShapeProps": true }],
+    "no-param-reassign": ["error", { "props": false }],
+    "space-before-function-paren": ["error", {
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "always"
+    }]
+  }
+}

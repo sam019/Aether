@@ -7,13 +7,13 @@
   border-top: 1px solid #292c33;
   cursor: pointer;
 }
-.channel-avatar {
+.group-avatar {
   width: 40px;
   height: 40px;
   margin-right: 10px;
   object-fit: cover;
 }
-.channel-name {
+.group-name {
   flex-grow: 1;
   font-size: 13px;
   line-height: 20px;

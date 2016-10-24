@@ -16,8 +16,12 @@ module.exports = {
       test: /\.(css|scss)$/,
       loader: 'style!css?modules!postcss!sass',
     }, {
-      test: /\.(png|jpg)$/,
+      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)\??.*$/,
       loader: 'url?limit=8192',
+      // url-loader是对file-loader的封装
+      // 功能是将小图片转为base64格式
+      // 其他的依然用file-loader处理
+      // 写了url-load不用再写file-loader
     }],
   },
   postcss() {

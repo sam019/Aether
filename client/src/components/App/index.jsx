@@ -5,6 +5,7 @@ export default function App(props) {
     width: '100vw',
     height: '100vh',
     display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
     fontFamily: 'Helvetica Neue, Helvetica, Hiragino Sans GB, Microsoft YaHei, 微软雅黑, Arial, sans-serif',
   };

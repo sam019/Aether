@@ -46,7 +46,7 @@ export default class Profile extends Component {
             className={Styles.portrait}
           />
         </button>
-        <span className={Styles['user-name']}>{this.props.userName}</span>
+        <span className={Styles['user-name']}>{this.props.username}</span>
         <input
           type="button"
           className={Styles.config}
@@ -70,5 +70,5 @@ export default class Profile extends Component {
   }
 }
 Profile.propTypes = {
-  userName: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
 };

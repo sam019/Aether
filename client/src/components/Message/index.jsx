@@ -11,7 +11,7 @@ export default class Message extends Component {
     this.setState({ showUserInfo: !this.state.showUserInfo });
   }
   render() {
-    const { avatar, userName, date, content, isMine } = this.props;
+    const { avatar, username, date, content, isMine } = this.props;
     return (
       <div
         className={Styles.message}
@@ -24,7 +24,7 @@ export default class Message extends Component {
           onClick={this.switchUserInfo}
         />
         <div className={Styles.wrap}>
-          <div className={Styles.info}>{userName} <date>{date}</date></div>
+          <div className={Styles.info}>{username} <date>{date}</date></div>
           <p className={Styles.content}>{content}</p>
         </div>
       </div>
@@ -32,9 +32,9 @@ export default class Message extends Component {
   }
 }
 Message.propTypes = {
-  avatar: PropTypes.string.isRequires,
-  userName: PropTypes.string.isRequires,
-  date: PropTypes.string.isRequires,
-  content: PropTypes.string.isRequires,
-  isMine: PropTypes.bool.isRequires,
+  avatar: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  isMine: PropTypes.bool.isRequired,
 };

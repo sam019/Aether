@@ -1,11 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-// import Styles from './Login.css';
+import Styles from './Login.css';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.handleUserName = this.handleUserName.bind(this);
+    this.state = {
+      username: '',
+      password: '',
+    };
+    this.handleUsername = this.handleUsername.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
@@ -14,39 +18,39 @@ export default class Login extends Component {
       localStorage.setItem('token', token);
     });
   } */
-  handleUserName(e) {
-    this.setState({ userName: e.target.value });
+  handleUsername(e) {
+    this.setState({ username: e.target.value });
   }
   handlePassword(e) {
     this.setState({ password: e.target.value });
   }
   handleLogin() {
-    const { userName, password } = this.state;
+    const { username, password } = this.state;
     this.props.login({
-      userName,
+      username,
       password,
     });
   }
   render() {
     return (
-      <div className="">
+      <div className={Styles.wrap}>
         <input
           type="text"
-          className=""
+          className={Styles.input}
           placeholder="请输入用户名"
-          onChange={this.handleUserName}
-          value={this.state.userName}
+          onChange={this.handleUsername}
+          value={this.state.username}
         />
         <input
           type="text"
-          className=""
+          className={Styles.input}
           placeholder="请输入密码"
           onChange={this.handlePassword}
           value={this.state.password}
         />
         <input
           type="button"
-          className=""
+          className={Styles.input}
           value="登录"
           onClick={this.handleLogin}
         />

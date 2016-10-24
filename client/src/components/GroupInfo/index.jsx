@@ -7,15 +7,16 @@ export default function ChannelInfo(props) {
       <input
         type="button"
         className={Styles.switchButton}
-        onClick={props.handleSwitch}
-        value="121212"
+        onClick={props.switchSidebar}
+        style={{ backgroundColor: props.showSidebar ? 'red' : 'green' }}
       />
       <div className={Styles.title}>{props.name} ({props.count})</div>
     </header>
   );
 }
 ChannelInfo.propTypes = {
+  showSidebar: PropTypes.bool.isRequired,
+  switchSidebar: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  count: PropTypes.number.isRequired,
-  handleSwitch: PropTypes.func.isRequired,
+  count: PropTypes.string.isRequired,
 };
