@@ -1,4 +1,6 @@
 const Koa = require('koa');
+const serve = require('koa-static');
+const convert = require('koa-convert');
 
 const app = new Koa();
 const server = require('http').createServer(app.callback());
@@ -11,10 +13,11 @@ const Group = require('./models/Group');
 mongoose.Promise = Promise;
 mongoose.connect('mongodb://localhost/im');
 
-app.use((ctx) => {
+app.use(convert(serve(__dirname + '/public')));
+/* app.use((ctx) => {
   // todo: return index page
   ctx.redirect('http://localhost:8080'); // dev：redirect to webpack-dev-server
-});
+}); */
 
 // 在线用户及人数
 let online = {
@@ -77,8 +80,10 @@ io.on('connect', (socket) => {
   socket.on('loginWithToken', async (token, cb) => {
     try {
       const username = jwt.verify(token, 'Aether').username;
-      const user = await User.findByName(username);
+      let user = await User.findByName(username);
       if (user) {
+        user = user.toObject();
+        delete user.password;
         online.addUser(socket, user);
         cb({
           success: true,
@@ -92,7 +97,10 @@ io.on('connect', (socket) => {
         });
       }
     } catch (err) {
-      console.log(err);
+      cb({
+        success: false,
+        reason: 'token expired',
+      });
     }
   });
   /* 前端用户名和密码登录 */
@@ -139,7 +147,12 @@ io.on('connect', (socket) => {
         return;
       }
       groups = groups.map((group) => {
+        group = group.toObject();
+        delete group._id;
         group.messages = group.messages.slice(-30);
+        for (const message of group.messages) {
+          delete message._id;
+        }
         return group;
       });
       cb(groups);
@@ -177,9 +190,12 @@ io.on('connect', (socket) => {
   socket.on('getHistoryMessages', async ({ groupName, before }, cb) => {
     try {
       const group = await Group.findByName(groupName);
-      let messages = group.messages;
-      if (group && before < messages.length) {
-        messages = group.messages.slice(-before - 15, -before);
+      if (group && before < group.messages.length) {
+        let messages = group.messages.toObject();
+        messages = messages.slice(-before - 15, -before);
+        for (const message of messages) {
+          delete message._id;
+        }
         cb({
           success: true,
           messages,

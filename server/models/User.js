@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.statics.findByName = function(username) {
-  return this.findOne({ username }, 'username groups').exec();
+  return this.findOne({ username }, 'username password groups -_id').exec();
 };
 
 module.exports = mongoose.model('User', userSchema);

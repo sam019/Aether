@@ -2,13 +2,31 @@
   position: relative;
   flex-grow: 1;
   overflow-y: scroll;
+  overflow-x: hidden;
   padding: 0 10px;
 }
 .loading {
   position: absolute;
   top: 0;
   left: 0;
-  margin-top: 5px;
-  width: 100%;
-  text-align: center;
+  right: 0;
+  width: 32px;
+  margin: 0 auto;
+  vertical-align: middle;
+  font-size: 32px;
+  color: #707070;
+  user-select: none;
+  animation-name: spin;
+  animation-timing-function: linear;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

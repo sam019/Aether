@@ -29,6 +29,14 @@ export default class Index extends Component {
           <MessagesList />
           <InputArea />
         </div>
+        <div
+          style={{ display: !this.props.showMask && 'none' }}
+          className={Styles.mask}
+          onClick={() => {
+            this.props.maskClickHandle();
+            this.props.switchMask();
+          }}
+        />
       </div>
     );
   }

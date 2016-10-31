@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import Immutable from 'immutable';
+import Group from '../../containers/Group';
 
 const style = {
   flexGrow: 1,
@@ -6,20 +8,25 @@ const style = {
 };
 
 export default function GroupsList(props) {
-  /* const channels = this.props.channels.map((item, index) => {
-    return (
-      <Channel
-        key={index}
+  const groups = [];
+  props.groups.forEach((group) => {
+    const groupName = group.get('groupName');
+    groups.push(
+      <Group
+        key={groupName}
+        groupName={groupName}
+        avatar={group.get('avatar')}
+        isSelected={props.currentGroup === groupName}
       />
     );
-  }); */
-  const channels = props.channels || null;
+  });
   return (
     <div style={style}>
-      {channels}
+      {groups}
     </div>
   );
 }
 GroupsList.propTypes = {
-  channels: PropTypes.arrayOf(PropTypes.object),
+  groups: PropTypes.instanceOf(Immutable.List),
+  currentGroup: PropTypes.string.isRequired,
 };

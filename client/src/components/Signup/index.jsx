@@ -25,7 +25,6 @@ export default class Signup extends Component {
     this.setState({ repeatPassword: e.target.value });
   }
   handleSignup() {
-    /* todo verfify */
     const { username, password } = this.state;
     this.props.signup({
       username,

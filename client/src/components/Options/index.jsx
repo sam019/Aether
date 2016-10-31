@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Styles from './Options.scss';
+import Styles from './Options.css';
 
 export default class Options extends Component {
   constructor(props) {
@@ -14,54 +14,75 @@ export default class Options extends Component {
     let notificationClass;
     if (!this.props.allowNotification) {
       notification = '开启桌面通知';
-      notificationClass = Styles['notic-off'];
+      notificationClass = 'icon-info-off';
     } else {
       notification = '关闭桌面通知';
-      notificationClass = Styles['notic-on'];
+      notificationClass = 'icon-info-on';
     }
     let sound;
     let soundClass;
     if (!this.props.allowSound) {
       sound = '开启声音';
-      soundClass = Styles['sound-off'];
+      soundClass = 'icon-sound-off';
     } else {
       sound = '关闭声音';
-      soundClass = Styles['sound-on'];
+      soundClass = 'icon-sound-on';
     }
     return (
-      <div className={Styles.mask} onClick={this.props.handleDisplayPanel}>
-        <ul className={Styles.panel} style={this.props.location}>
+      <div
+        className={Styles.mask}
+        onClick={this.props.handleDisplayPanel}
+      >
+        <ul
+          className={Styles.panel}
+          style={this.props.location}
+        >
           <li>
             <button
-              className={`${Styles.option} ${Styles.chat}`}
+              className={`${Styles.option}`}
               onClick={this.props.launchChat}
-            >发起聊天</button>
+            >
+              <i className={`iconfont icon-group ${Styles.icon}`} />
+              发起聊天
+            </button>
           </li>
           <li>
             <button
-              className={`${Styles.option} ${notificationClass}`}
+              className={`${Styles.option}`}
               onClick={this.props.switchNotification}
-            >{notification}</button>
+            >
+              <i className={`iconfont ${notificationClass} ${Styles.icon}`} />
+              {notification}
+            </button>
           </li>
           <li>
             <button
-              className={`${Styles.option} ${soundClass}`}
+              className={`${Styles.option}`}
               onClick={this.props.switchSound}
-            >{sound}</button>
+            >
+              <i className={`iconfont ${soundClass} ${Styles.icon}`} />
+              {sound}
+            </button>
           </li>
           <li>
             <a
-              className={`${Styles.option} ${Styles.resource}`}
+              className={`${Styles.option}`}
               href="https://github.com/oddTick/Aether"
               target="_blank"
               rel="noopener noreferrer"
-            >源码</a>
+            >
+              <i className={`iconfont icon-github ${Styles.icon}`} />
+              源码
+            </a>
           </li>
           <li>
             <button
-              className={`${Styles.option} ${Styles.quit}`}
+              className={`${Styles.option}`}
               onClick={this.logout}
-            >退出</button>
+            >
+              <i className={`iconfont icon-quit ${Styles.icon}`} />
+              退出
+            </button>
           </li>
         </ul>
       </div>

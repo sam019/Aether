@@ -3,15 +3,18 @@ import Styles from './GroupInfo.css';
 
 export default function ChannelInfo(props) {
   return (
-    <header className={Styles.header}>
-      <input
-        type="button"
+    <div className={Styles.header}>
+      <button
         className={Styles.switchButton}
         onClick={props.switchSidebar}
-        style={{ backgroundColor: props.showSidebar ? 'red' : 'green' }}
-      />
+      >
+        <i
+          className={`iconfont icon-switch ${Styles.icon}`}
+          style={{ transform: props.showSidebar ? 'rotate(-45deg)' : '' }}
+        />
+      </button>
       <div className={Styles.title}>{props.name} ({props.count})</div>
-    </header>
+    </div>
   );
 }
 ChannelInfo.propTypes = {

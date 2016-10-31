@@ -1,15 +1,19 @@
-import React, { Component, PropTypes } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import React, { PureComponent, PropTypes } from 'react';
+import Immutable from 'immutable';
 import Message from '../Message';
 import Styles from './MessagesList.css';
 
-export default class MessageList extends Component {
+export default class MessageList extends PureComponent {
   constructor(props) {
     super(props);
     this.sate = {
       scrollBottom: 0,
     };
     this.handleScroll = this.handleScroll.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
   }
   componentWillReceiveProps(nextProps) {
     const ele = this.ele;
@@ -26,16 +30,24 @@ export default class MessageList extends Component {
       this.setScrollBottom();
     }
   }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
   setScrollBottom() {
     const ele = this.ele;
     const scrollTop = parseInt(ele.scrollHeight - ele.clientHeight - this.state.scrollBottom, 10);
     ele.scrollTop = scrollTop;
   }
   handleScroll() {
-    const scrollTop = this.ele.scrollTop;
+    const ele = this.ele;
+    const scrollTop = ele.scrollTop;
     if (scrollTop === 0 && !this.props.getting) {
       this.props.getHistoryMessages();
     }
+  }
+  handleResize() {
+    const ele = this.ele;
+    ele.scrollTop = parseInt(ele.scrollHeight - ele.clientHeight, 10);
   }
   render() {
     let messages = this.props.messages ? this.props.messages.toJS() : [];
@@ -56,8 +68,8 @@ export default class MessageList extends Component {
         onScroll={this.handleScroll}
       >
         <i
-          style={{ display: this.props.getting ? 'block' : 'none' }}
-          className={`${Styles.loading} iconfont icon-jiahao`}
+          style={{ display: !this.props.getting ? 'none' : '' }}
+          className={`${Styles.loading} iconfont icon-loading`}
         />
         {messages}
       </div>
@@ -66,7 +78,7 @@ export default class MessageList extends Component {
 }
 
 MessageList.propTypes = {
-  messages: ImmutablePropTypes.list,
+  messages: PropTypes.instanceOf(Immutable.List).isRequired,
   username: PropTypes.string.isRequired,
   getHistoryMessages: PropTypes.func.isRequired,
   getting: PropTypes.bool.isRequired,

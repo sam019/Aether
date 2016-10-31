@@ -29,5 +29,10 @@
 .config {
   width: 30px;
   height: 30px;
-  background: url(./panel.png) no-repeat center center;
+}
+/* icon */
+.icon {
+  font-size: 30px;
+  line-height: 30px;
+  color: #707070;
 }

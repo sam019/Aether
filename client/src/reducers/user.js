@@ -5,8 +5,7 @@ export default function(user = fromJS({ username: undefined }), action) {
     case 'INIT_USER_INFO': {
       const userInfo = action.payload;
       if (userInfo) {
-        const { username, groups } = userInfo;
-        return user.set('username', username).set('groups', fromJS(groups));
+        return fromJS(userInfo);
       }
       /* 不带参数则初始化 */
       return fromJS({ username: undefined });

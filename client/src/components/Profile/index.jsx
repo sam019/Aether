@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Styles from './Profile.css';
 import Options from '../../containers/Options';
-import { getElementTop, getElementLeft } from '../../Utils';
+import { getElementTop, getElementLeft } from '../../assets/Utils';
 
 export default class Profile extends Component {
   constructor(props) {
@@ -47,11 +47,12 @@ export default class Profile extends Component {
           />
         </button>
         <span className={Styles['user-name']}>{this.props.username}</span>
-        <input
-          type="button"
+        <button
           className={Styles.config}
           onClick={this.handleDisplayPanel}
-        />
+        >
+          <i className={`iconfont icon-down ${Styles.icon}`} />
+        </button>
         {
           /* launchChat={this.props.launchChat}
         switchNotification={this.props.switchNotification}

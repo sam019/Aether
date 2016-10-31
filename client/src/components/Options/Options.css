@@ -31,41 +31,21 @@
 /* 按钮样式 */
 .option {
   display: block;
-  box-sizing: border-box;
+  /*按钮元素默认宽度不会充满
+  且默认为文本居中对齐*/
   width: 100%;
-  padding-left: 50px;
+  height: 100%;
   text-align: left;
-  background-repeat: no-repeat;
-  background-position: 10% center;
 }
 /* 按钮悬浮样式 */
 .option:hover {
   background-color: #c3c3c3;
 }
-/* 发起聊天 */
-.chat {
-  background-image: url(./imgs/chat.png);
-}
-/* 桌面通知 */
-.notic-on {
-  background-image: url(./imgs/notic_on.png);
-}
-.notic-off {
-  background-image: url(./imgs/notic_off.png);
-}
-/* 声音通知 */
-.sound-on {
-  background-image: url(./imgs/sound_on.png);
-}
-.sound-off {
-  background-image: url(./imgs/sound_off.png);
-}
-/* 源码 */
-.resource {
-  height: 100%;
-  background-image: url(./imgs/feedback.png);
-}
-/* 登出 */
-.quit {
-  background-image: url(./imgs/quit.png);
+.icon {
+  display: inline-block;
+  width: 50px;
+  font-size: 30px;
+  color: #707070;
+  vertical-align: middle;
+  text-align: center;
 }

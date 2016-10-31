@@ -1,14 +1,16 @@
 import { connect } from 'react-redux';
 import GroupsList from '../components/GroupsList';
 
-/* function mapStateToProps() {
+function mapStateToProps(state) {
+  return {
+    groups: state.get('groups') || [],
+    currentGroup: state.get('currentGroup'),
+  };
+}
+
+/* function mapDispatchToProps() {
   // todo
   return { a: 1 };
 } */
 
-/* function mapDispatchToActions() {
-  // todo
-  return { a: 1 };
-} */
-
-export default connect()(GroupsList);
+export default connect(mapStateToProps)(GroupsList);

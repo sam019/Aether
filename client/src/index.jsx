@@ -7,7 +7,7 @@ import App from './components/App';
 import Index from './containers/Index';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
-import './base.css';
+import './assets/base.css';
 import loginWithToken from './actions/loginWithToken';
 
 /* 登录验证 */
@@ -18,6 +18,7 @@ function authenticate(nextState, replace, cb) {
     cb();
   }
 }
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>

@@ -1,9 +1,9 @@
-/* 发送消息 */
 .wrap {
   flex-shrink: 0;
+  position: relative;
   display: flex;
   align-items: center;
-  min-height: 50px;
+  height: 50px;
   border-top: 1px solid #ccc;
 }
 /* 输入框 */
@@ -22,13 +22,9 @@
   box-sizing: border-box;
   width: 34px;
   height: 34px;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 /* 发送表情 */
 .switch-expressions {
-  background-image: url(./imgs/expression.png);
   margin-left: 5px;
 }
 /* 发送文本 */
@@ -42,7 +38,38 @@
 }
 /* 发送图片 */
 .send-img {
-  background-image: url(./imgs/file.png);
   margin-left: 5px;
   margin-right: 10px;
+}
+/* 字体图标 */
+.icon {
+  font-size: 32px;
+  line-height: 32px;
+  color: #707070;
+}
+/* 表情栏 */
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+}
+.expressions {
+  position: absolute;
+  bottom: 55px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 320px;
+}
+.expressions i {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  background-image: url('../../assets/expressions.png');
+  cursor: pointer;
 }

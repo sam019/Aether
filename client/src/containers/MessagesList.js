@@ -4,10 +4,16 @@ import getHistoryMessages from '../actions/getHistoryMessages';
 
 function mapStateToProps(state) {
   const currentGroup = state.get('currentGroup');
+  let theGroup;
+  state.get('groups').forEach((group) => {
+    if (group.get('groupName') === currentGroup) {
+      theGroup = group;
+    }
+  });
   return {
-    messages: state.getIn(['groups', currentGroup, 'messages']),
+    messages: theGroup ? theGroup.get('messages') : undefined,
     username: state.getIn(['user', 'username']),
-    getting: state.getIn(['groups', currentGroup, 'getting']) || false,
+    getting: theGroup ? theGroup.get('getting') : false,
   };
 }
 

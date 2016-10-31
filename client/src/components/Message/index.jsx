@@ -7,6 +7,9 @@ export default class Message extends Component {
     this.state = { showUserInfo: false };
     this.switchUserInfo = this.switchUserInfo.bind(this);
   }
+  componentDidMount() {
+    this.ele.style.maxWidth = `${this.ele.clientWidth}px`;
+  }
   switchUserInfo() {
     this.setState({ showUserInfo: !this.state.showUserInfo });
   }
@@ -23,9 +26,15 @@ export default class Message extends Component {
           className={Styles.avatar}
           onClick={this.switchUserInfo}
         />
-        <div className={Styles.wrap}>
+        <div
+          className={Styles.wrap}
+          ref={(ele) => { this.ele = ele; }}
+        >
           <div className={Styles.info}>{username} <date>{date}</date></div>
-          <p className={Styles.content}>{content}</p>
+          <p
+            className={Styles.content}
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         </div>
       </div>
     );

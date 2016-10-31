@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 
@@ -13,8 +14,8 @@ module.exports = {
       loader: 'babel',
       exclude: /node_modules/,
     }, {
-      test: /\.(css|scss)$/,
-      loader: 'style!css?modules!postcss!sass',
+      test: /\.css$/,
+      loader: 'style!css?modules&localIdentName=[local]-[hash:base64:5]!postcss',
     }, {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)\??.*$/,
       loader: 'url?limit=8192',
@@ -30,4 +31,19 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
+  devServer: {
+    proxy: {
+      '/': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+    },
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Aether',
+      template: './src/assets/index.ejs',
+      inject: 'body',
+    }),
+  ],
 };

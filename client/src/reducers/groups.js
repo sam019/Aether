@@ -10,25 +10,35 @@ export default function(groups = fromJS({}), action) {
         content,
         type,
       };
-      return groups.updateIn([groupName, 'messages'], fromJS([]), array => array.push(message));
+      return groups.map((group) => {
+        if (group.get('groupName') === groupName) {
+          return group.update('messages', fromJS([]), array => array.push(fromJS(message)));
+        }
+        return group;
+      });
     }
     case 'INITIALIZE_GROUP_INFO': {
-      const initialMessages = {};
-      for (const group of action.payload) {
-        initialMessages[group.groupName] = {};
-        initialMessages[group.groupName].messages = group.messages;
-      }
-      return fromJS(initialMessages);
+      return fromJS(action.payload);
     }
     case 'GETTING_HISTORY_MESSAGES': {
       const groupName = action.payload;
-      return groups.setIn([groupName, 'getting'], true);
+      return groups.map((group) => {
+        if (group.get('groupName') === groupName) {
+          return group.set('getting', true);
+        }
+        return group;
+      });
     }
     case 'RECEIVE_HISTORY_MESSAGES': {
       const { groupName, messages } = action.payload;
-      return groups
-      .updateIn([groupName, 'messages'], array => array.unshift(...messages))
-      .setIn([groupName, 'getting'], false);
+      return groups.map((group) => {
+        if (group.get('groupName') === groupName) {
+          return group
+          .update('messages', array => array.unshift(...fromJS(messages)))
+          .set('getting', false);
+        }
+        return group;
+      });
     }
     default: return groups;
   }

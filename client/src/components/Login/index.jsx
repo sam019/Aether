@@ -13,19 +13,16 @@ export default class Login extends Component {
     this.handlePassword = this.handlePassword.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
-  /* componentDidMount() {
-    socket.on('loginWithoutToken', ({ token, user }) => {
-      localStorage.setItem('token', token);
-    });
-  } */
   handleUsername(e) {
-    this.setState({ username: e.target.value });
+    this.setState({ username: e.target.value.toString() });
   }
   handlePassword(e) {
-    this.setState({ password: e.target.value });
+    this.setState({ password: e.target.value.toString() });
   }
   handleLogin() {
     const { username, password } = this.state;
+    username.trim();
+    password.trim();
     this.props.login({
       username,
       password,
