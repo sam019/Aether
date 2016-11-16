@@ -1,5 +1,5 @@
 /* app */
-.app {
+.wrap {
   display: flex;
   max-width: 1024px;
   max-height: 768px;
@@ -9,8 +9,7 @@
 }
 /* sidebar */
 .sidebar {
-  flex-basis: 280px;
-  flex-shrink: 0;
+  flex: 0 0 280px;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -20,8 +19,7 @@
 }
 /* right-box */
 .right-box {
-  flex-grow: 1;
-  flex-shrink: 0;
+  flex: 1 0 0;
   display: flex;
   height: 100%;
   flex-direction: column;

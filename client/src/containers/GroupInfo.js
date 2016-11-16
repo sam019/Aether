@@ -3,10 +3,15 @@ import GroupInfo from '../components/GroupInfo';
 import switchSidebar from '../actions/switchSidebar';
 
 function mapStateToProps(state) {
+  let groupName = state.get('currentGroup');
+  const match = groupName.match(/(.*)&&(.*)/);
+  if (match) {
+    groupName = state.getIn(['user', 'username']) === match[1] ? match[2] : match[1];
+  }
   return {
     showSidebar: state.get('showSidebar'),
-    name: state.get('currentGroup'),
-    count: '1',
+    groupName,
+    // count: '1',
   };
 }
 

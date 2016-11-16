@@ -1,4 +1,8 @@
 {
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 8
+  },
   "extends": "airbnb",
   "installedESLint": true,
   "plugins": [
@@ -16,12 +20,18 @@
   "rules": {
     "jsx-a11y/no-static-element-interactions": "off",
     "react/no-unused-prop-types": [2, { "skipShapeProps": true }],
+    "react/no-danger":[0],
     "no-param-reassign": ["error", { "props": false }],
     "space-before-function-paren": ["error", {
       "anonymous": "never",
       "named": "never",
       "asyncArrow": "always"
     }],
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "max-len": ["error", 140],
+    "no-unused-expressions": ["error", {
+      "allowShortCircuit": true,
+      "allowTernary": true
+    }]
   }
 }

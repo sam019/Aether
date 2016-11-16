@@ -2,14 +2,11 @@ import { connect } from 'react-redux';
 import Profile from '../components/Profile';
 
 function mapStateToProps(state) {
+  const user = state.get('user');
   return {
-    username: state.getIn(['user', 'username']),
+    username: user.get('username'),
+    avatar: user.get('avatar'),
   };
 }
-
-/* function mapDispatchToActions() {
-  // todo
-  return { a: 1 };
-} */
 
 export default connect(mapStateToProps)(Profile);

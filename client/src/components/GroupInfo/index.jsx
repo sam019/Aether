@@ -13,13 +13,13 @@ export default function ChannelInfo(props) {
           style={{ transform: props.showSidebar ? 'rotate(-45deg)' : '' }}
         />
       </button>
-      <div className={Styles.title}>{props.name} ({props.count})</div>
+      <div className={Styles.title}>{props.groupName}{/*  ({props.count}) */}</div>
     </div>
   );
 }
 ChannelInfo.propTypes = {
   showSidebar: PropTypes.bool.isRequired,
   switchSidebar: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  count: PropTypes.string.isRequired,
+  groupName: PropTypes.string.isRequired,
+  // count: PropTypes.string.isRequired,
 };

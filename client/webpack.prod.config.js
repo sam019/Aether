@@ -14,6 +14,7 @@ module.exports = {
       'react-dom',
       'redux',
       'react-redux',
+      'immutable',
       'redux-immutable',
       'redux-thunk',
       'react-router',
@@ -37,7 +38,7 @@ module.exports = {
       // postcss是提供多种插件的平台，包括autoprefixed(自动补全浏览器前缀),precss(提供类似sass的语法)等
     }, {
       test: /\.(png|jpg|jpeg|gif)\??.*$/,
-      loader: 'url?limit=8192',
+      loader: 'url?limit=8192&name=[name]_[hash:5].[ext]',
     }],
   },
   postcss() {

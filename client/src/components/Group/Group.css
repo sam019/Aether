@@ -11,6 +11,9 @@
   height: 40px;
   margin-right: 10px;
   object-fit: cover;
+  text-align: center;
+  line-height: 40px;
+  background-color: orange;
 }
 .group-name {
   flex-grow: 1;

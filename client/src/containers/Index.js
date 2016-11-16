@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import Index from '../components/Index';
-import initializeAndListening from '../actions/initializeAndListening';
 
 function mapStateToProps(state) {
   return {
@@ -8,7 +7,4 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = {
-  initializeAndListening,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default connect(mapStateToProps)(Index);

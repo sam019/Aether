@@ -7,16 +7,17 @@
   padding: 18px;
   color: #fff;
 }
-/* 头像wrap */
-.wrap {
-  height: 40px;
-  margin-right: 10px;
-}
 /* 头像 */
 .portrait {
   width: 40px;
   height: 40px;
-  object-fit: cover;
+  margin-right: 10px;
+  object-fit: fill;
+  overflow: hidden;
+  background-color: #369;
+  text-align: center;
+  line-height: 40px;
+  font-size: 13px;
 }
 /* 用户名 */
 .user-name {
@@ -35,4 +36,33 @@
   font-size: 30px;
   line-height: 30px;
   color: #707070;
+}
+/* 遮罩 */
+.mask {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+}
+/* 过渡 */
+.enter {
+  transform: scale(0.6);
+  opacity: 0.7;
+}
+.enterActive {
+  transform: scale(1);
+  opacity: 1;
+  transition: all 0.2s linear;
+}
+.leave {
+  transform: scale(1);
+  opacity: 1;
+}
+.leaveActive {
+  transform: scale(0.6);
+  opacity: 0.3;
+  transition: all 0.2s linear;
 }

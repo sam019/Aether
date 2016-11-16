@@ -10,10 +10,15 @@ function mapStateToProps(state) {
       theGroup = group;
     }
   });
+  const user = state.get('user');
   return {
-    messages: theGroup ? theGroup.get('messages') : undefined,
-    username: state.getIn(['user', 'username']),
-    getting: theGroup ? theGroup.get('getting') : false,
+    groupName: currentGroup,
+    messages: theGroup && theGroup.get('messages'),
+    username: user.get('username'),
+    avatar: user.get('avatar'),
+    getting: theGroup && theGroup.get('getting'),
+    allowNotification: user.get('allowNotification'),
+    allowSound: user.get('allowSound'),
   };
 }
 

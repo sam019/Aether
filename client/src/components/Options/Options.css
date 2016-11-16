@@ -1,15 +1,9 @@
-/* 面板遮罩 */
-.mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 99;
-}
 /* 选项面板 */
 .panel {
-  position: fixed;
+  position: absolute;
+  z-index: 99;
+  top: 58px;
+  left: 60px;
   background-color: #fff;
   border: 1px solid #d6d6d6;
   border-radius: 4px;
@@ -28,7 +22,7 @@
     border-top: 1px solid #f1f1f1;
   }
 }
-/* 按钮样式 */
+/* 按钮 */
 .option {
   display: block;
   /*按钮元素默认宽度不会充满
@@ -37,10 +31,11 @@
   height: 100%;
   text-align: left;
 }
-/* 按钮悬浮样式 */
+/* 按钮悬浮 */
 .option:hover {
   background-color: #c3c3c3;
 }
+/* 图标 */
 .icon {
   display: inline-block;
   width: 50px;
@@ -48,4 +43,53 @@
   color: #707070;
   vertical-align: middle;
   text-align: center;
+}
+/* 组名输入 */
+.join {
+  position: fixed;
+  z-index: 99;
+  top: 35vh;
+  left: 50vw;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  width: 70vw;
+  max-width: 210px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.title {
+  background-color: #ccc;
+  text-align: center;
+}
+.title-1 {
+  font-size: 16px;
+  line-height: 32px;
+  height: 32px;
+  color: #444;
+}
+.title-2 {
+  font-size: 14px;
+  line-height: 26px;
+  height: 26px;
+  color: #288525;
+}
+.input {
+  display: block;
+  width: 70%;
+  height: 32px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin: 10px auto;
+}
+.confirm {
+  display: block;
+  margin: 10px auto;
+  width: 80px;
+  height: 28px;
+  font-size: 14px;
+  line-height: 28px;
+  color: #fff;
+  background-color: #6c0;
+  border-radius: 20px;
 }

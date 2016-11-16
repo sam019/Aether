@@ -1,0 +1,81 @@
+/* 个人信息卡片 */
+.card {
+  position: absolute;
+  z-index: 99;
+  top: 58px;
+  left: 50px;
+  width: 220px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+/* 头像label */
+.avatar-wrap {
+  display: block;
+}
+/* 头像 */
+.avatar {
+  display: block;
+  width: 220px;
+  height: 220px;
+  object-fit: fill;
+  line-height: 220px;
+  font-size: 40px;
+  text-align: center;
+  background-color: #9c3;
+}
+/* 信息栏 */
+.info-wrap {
+  padding: 20px;
+  background-color: #fff;
+}
+/* 名称栏 */
+.name-wrap {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  line-height: 28px;
+  margin-bottom: 8px;
+  color: #000;
+}
+/* 用户名 */
+.name {
+  flex-grow: 1;
+  font-size: 18px;
+  font-weight: normal;
+
+}
+/* 编辑和确认按钮 */
+.button {
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+
+}
+/* 按钮图标 */
+.icon {
+  font-size: 26px;
+  color: #707070;
+}
+/* 签名和地址 */
+.info {
+  display: flex;
+  line-height: 20px;
+  font-size: 12px;
+  color: #888;
+}
+/* 头部 */
+.info-head {
+  flex-shrink: 0;
+}
+/* 内容和输入框 */
+.info-text,
+.info-input {
+  flex-grow: 1;
+}
+.info-input {
+  margin: 5px 0;
+  height: 25px;
+  width: 50%;
+  border: 1px solid #888;
+}

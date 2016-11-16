@@ -1,14 +1,20 @@
 import { fromJS } from 'immutable';
 
-export default function(user = fromJS({ username: undefined }), action) {
+export default function(user = fromJS({ err: {} }), action) {
+  const payload = action.payload;
   switch (action.type) {
-    case 'INIT_USER_INFO': {
-      const userInfo = action.payload;
-      if (userInfo) {
-        return fromJS(userInfo);
+    case 'SET_USER_INFO': {
+      if (!payload) {
+        return fromJS({ err: {} });
       }
-      /* 不带参数则初始化 */
-      return fromJS({ username: undefined });
+      let newState = user;
+      for (const key of Object.keys(payload)) {
+        newState = newState.set(key, payload[key]);
+      }
+      return newState.delete('code');
+    }
+    case 'SET_ERR': {
+      return user.set('err', fromJS(payload));
     }
     default: return user;
   }

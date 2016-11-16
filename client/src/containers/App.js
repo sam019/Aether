@@ -1,4 +1,9 @@
 import { connect } from 'react-redux';
 import App from '../components/App';
+import startListening from '../actions/startListening';
 
-export default connect()(App);
+const mapDispatchToProps = {
+  startListening,
+};
+
+export default connect(null, mapDispatchToProps)(App);

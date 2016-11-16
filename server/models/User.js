@@ -1,15 +1,39 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   username: { type: String, unique: true },
   password: String,
-  groups: { type: Array, default: ['main'] },
-  created: { type: Date, default: Date.now, index: true },
-  updated: { type: Date, default: Date.now, index: true },
+  avatar: String,
+  groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
+  allowNotification: { type: Boolean, default: true },
+  allowSound: { type: Boolean, default: true },
+  sign: String,
+  location: String,
+  created: { type: Date, default: Date.now() },
 });
 
-userSchema.statics.findByName = function(username) {
-  return this.findOne({ username }, 'username password groups -_id').exec();
+userSchema.statics.getFullInfo = function(username) {
+  return this.findOne({ username }).populate({
+    path: 'groups',
+    /* options: {
+      sort: { _id: 1 },
+    }, */
+    populate: {
+      path: 'messages',
+      options: {
+        sort: { _id: -1 },
+        limit: 30,
+      },
+      populate: {
+        path: 'user',
+        select: 'username avatar'
+      },
+    },
+  });
+};
+userSchema.statics.getSimpleInfo = function(username) {
+  return this.findOne({ username }).exec();
 };
 
 module.exports = mongoose.model('User', userSchema);

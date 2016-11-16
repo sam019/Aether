@@ -1,11 +1,15 @@
 import { browserHistory } from 'react-router';
-import initUserInfo from './initUserInfo';
+import setUserInfo from './setUserInfo';
+import setGroupsInfo from './setGroupsInfo';
 
 export default function logout() {
   return (dispatch, getState, socket) => {
-    socket.emit('logout', localStorage.getItem('token'));
+    socket.emit('logout');
     localStorage.removeItem('token');
     browserHistory.push('/login');
-    dispatch(initUserInfo());
+    dispatch(setUserInfo());
+    dispatch(setGroupsInfo());
+    dispatch({ type: 'RESET_CURRENT_GROUP' });
+    dispatch({ type: 'RESET_SIDEBAR' });
   };
 }

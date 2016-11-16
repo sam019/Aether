@@ -1,19 +1,27 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
+import { autobind } from 'core-decorators';
 import Styles from './InputArea.css';
 import { expressions } from '../../assets/Utils';
 
-export default class InputArea extends Component {
+@autobind
+export default class InputArea extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       content: '',
       showExpressions: false,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.switchExpressions = this.switchExpressions.bind(this);
-    this.handleKeydown = this.handleKeydown.bind(this);
-    this.selectExpression = this.selectExpression.bind(this);
-    this.sendText = this.sendText.bind(this);
+  }
+  componentWillMount() {
+    this.expressions = expressions.map((item, index) => (
+      <i
+        key={item}
+        style={{ backgroundPosition: `0 ${-index * 30}px` }}
+        data-name={item}
+        onClick={this.selectExpression}
+        title={item}
+      />
+    ));
   }
   handleKeydown(e) {
     if (this.state.content && e.key === 'Enter') {
@@ -25,12 +33,14 @@ export default class InputArea extends Component {
       content: e.target.value,
     });
   }
-  switchExpressions() {
+  switchExpressions(e) {
+    e.stopPropagation();
     this.setState({ showExpressions: !this.state.showExpressions });
+    this.input.focus();
   }
   selectExpression(e) {
     this.setState({
-      content: `${this.state.content}#(${e.target.name})`,
+      content: `${this.state.content}#(${e.target.dataset.name})`,
     });
   }
   sendText() {
@@ -41,6 +51,14 @@ export default class InputArea extends Component {
     });
     this.setState({ content: '' });
     this.input.focus();
+  }
+  sendImg(e) {
+    const file = e.target.files[0];
+    file.type.indexOf('image') !== -1 && this.props.sendMessage({
+      timestamp: Date.now(),
+      type: 'img',
+      content: file,
+    });
   }
   render() {
     let lastButton;
@@ -58,7 +76,7 @@ export default class InputArea extends Component {
         <label
           htmlFor="file"
           className={Styles['send-img']}
-          onClick={this.sendImg}
+          onChange={this.sendImg}
         >
           <input
             id="file"
@@ -69,14 +87,6 @@ export default class InputArea extends Component {
         </label>
       );
     }
-    const exps = expressions.map((item, index) => (
-      <i
-        key={item}
-        style={{ backgroundPosition: `0 ${-index * 30}px` }}
-        data-item={item}
-        onClick={this.switchExpressions}
-      />
-    ));
     return (
       <div className={Styles.wrap} >
         <input
@@ -98,24 +108,17 @@ export default class InputArea extends Component {
           style={{ display: !this.state.showExpressions && 'none' }}
           className={Styles.mask}
           onClick={this.switchExpressions}
+        />
+        <div
+          className={`${Styles.expressions} ${this.state.showExpressions ? Styles.show : Styles.hidden}`}
+          onClick={this.switchExpressions}
         >
-          <div className={Styles.expressions}>
-            {exps}
-          </div>
+          {this.expressions}
         </div>
       </div>
     );
   }
 }
-/* InputArea.defaultProps = {
-  expressions: expressions.map((item, index) => (
-    <i
-      style={{ backgroundPosition: `0 ${-index * 30}px` }}
-      data-item={item}
-      onClick={this.switchExpressions}
-    />
-  )),
-}; */
 InputArea.propTypes = {
   sendMessage: PropTypes.func.isRequired,
 };

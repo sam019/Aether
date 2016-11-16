@@ -1,75 +1,72 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { autobind } from 'core-decorators';
 import Styles from './Profile.css';
+import MyCard from '../../containers/Mycard';
 import Options from '../../containers/Options';
-import { getElementTop, getElementLeft } from '../../assets/Utils';
 
-export default class Profile extends Component {
+@autobind
+export default class Profile extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       displayDetail: false,
       displayPanel: false,
+      displayInput: false,
+      groupName: '',
     };
-    this.handleDisplayPanel = this.handleDisplayPanel.bind(this);
-    this.handleDisplayDetail = this.handleDisplayDetail.bind(this);
   }
-  /**
-   * 显示详细信息
-   */
+  // 显示详细信息
   handleDisplayDetail() {
     this.setState({ displayDetail: !this.state.displayDetail });
   }
-  /**
-   * 显示设置面板
-   */
+  // 显示设置面板
   handleDisplayPanel() {
-    if (!this.state.displayPanel) {
-      this.setState({
-        panelTop: getElementTop(this.ele) + 58,
-        panelLeft: getElementLeft(this.ele) + 80,
-        displayPanel: true,
-      });
-    } else {
-      this.setState({ displayPanel: false });
-    }
+    this.setState({ displayPanel: !this.state.displayPanel });
   }
   render() {
+    const { avatar, username } = this.props;
     return (
       <div className={Styles.card} ref={(ele) => { this.ele = ele; }}>
-        <button
+        <img
+          src={avatar}
+          alt={username.slice(0, 1)}
+          className={Styles.portrait}
           onClick={this.handleDisplayDetail}
-          className={Styles.wrap}
-        >
-          <img
-            src=""
-            alt="头像"
-            className={Styles.portrait}
-          />
-        </button>
-        <span className={Styles['user-name']}>{this.props.username}</span>
+        />
+        <span className={Styles['user-name']}>{username}</span>
         <button
           className={Styles.config}
           onClick={this.handleDisplayPanel}
         >
           <i className={`iconfont icon-down ${Styles.icon}`} />
         </button>
-        {
-          /* launchChat={this.props.launchChat}
-        switchNotification={this.props.switchNotification}
-        switchSound={this.props.switchSound}
-        resource={this.props.resource}
-        quit={this.props.quit} */}
-        {/* allowNotification={this.props.allowNotification}
-        allowSound={this.props.allowSound} */}
-        {this.state.displayPanel ? <Options
-          handleDisplayPanel={this.handleDisplayPanel}
-          location={{ top: this.state.panelTop, left: this.state.panelLeft }}
-        /> : null
-        }
+        <div
+          style={{ display: this.state.displayPanel || this.state.displayDetail ? 'block' : 'none' }}
+          className={Styles.mask}
+          onClick={this.state.displayPanel ? this.handleDisplayPanel : this.handleDisplayDetail}
+        />
+        <ReactCSSTransitionGroup
+          component={props => React.Children.toArray(props.children)[0] || null}
+          transitionName={{
+            enter: Styles.enter,
+            enterActive: Styles.enterActive,
+            leave: Styles.leave,
+            leaveActive: Styles.leaveActive,
+          }}
+          transitionEnterTimeout={200}
+          transitionLeaveTimeout={200}
+        >
+          {this.state.displayDetail && <MyCard />}
+        </ReactCSSTransitionGroup>
+        {this.state.displayPanel && <Options
+          unmount={this.handleDisplayPanel}
+        />}
       </div>
     );
   }
 }
 Profile.propTypes = {
   username: PropTypes.string.isRequired,
+  avatar: PropTypes.string,
 };

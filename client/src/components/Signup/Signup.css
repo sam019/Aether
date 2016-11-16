@@ -1,19 +1,77 @@
 .wrap {
   max-width: 420px;
-  max-height: 840px;
+  max-height: 280px;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
 }
-.input {
-  width: 80%;
-  height: 40px;
-  border: 1px solid black;
+
+.err {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+}
+.info {
+  height: 30px;
+  padding: 3px 12px;
+  border-radius: 10px;
+  line-height: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 6px 2px #ccc;
+}
+.show {
+  transform: scale(1);
+  margin-top: 10vh;
+  opacity: 1;
+  transition: margin-top 0.5s, opacity 0.5s;
+}
+.hide {
+  transform: scale(0);
+  margin-top: 0;
+  opacity: 0;
+  transition: margin-top 0.5s, opacity 0.5s, transform 0.1s 0.5s;
+}
+.label {
+  display: flex;
+  align-items: center;
+  width: 70%;
   margin: 10px 0;
 }
-.signup {
-  width: 40%;
+.input {
+  flex: 1 1 0;
+  width: 0;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 3px 0 3px 10px;
+  font-size: 22px;
+}
+.input:focus {
+  border-color: #9cf;
+  box-shadow: 0 0 3px 1px #9cf;
+}
+.icon {
+  flex: 0 0 auto;
+  font-size: 24px;
+}
+.submit {
+  flex: 0 0 auto;
+  width: 50%;
+  height: 40px;
+  background-color: #69c;
+  border-radius: 10px;
+}
+.link {
+  margin-top: 10px;
+  height: 20px;
+  line-height: 20px;
 }

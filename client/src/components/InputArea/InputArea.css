@@ -58,13 +58,17 @@
 }
 .expressions {
   position: absolute;
-  bottom: 55px;
+  z-index: 100;
+  bottom: 60px;
   left: 0;
   right: 0;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
   width: 320px;
+  background-color: white;
+  box-shadow: 0px 0px 10px 0 #777;
+  transition: opacity 0.25s 0.25s, transform 0.5s;
 }
 .expressions i {
   width: 30px;
@@ -72,4 +76,14 @@
   margin: 5px;
   background-image: url('../../assets/expressions.png');
   cursor: pointer;
+}
+.show {
+  transform: scale(1);
+  opacity: 1;
+  transition: opacity 0.25s linear, transform 0.5s -0.25s linear;
+}
+.hidden {
+  transform: scale(0);
+  opacity: 0;
+  transition: opacity 0.25s linear, transform 0.5s linear;
 }

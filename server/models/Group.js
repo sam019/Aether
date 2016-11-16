@@ -1,19 +1,43 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const messageSchema = new mongoose.Schema({
-  timestamp: Number,
-  username: String,
-  type: String,
-  content: String,
-});
-const groupSchema = new mongoose.Schema({
+const groupSchema = new Schema({
   groupName: { type: String, unique: true },
-  messages: [messageSchema],
-  created: { type: Date, default: Date.now, index: true },
-  updated: { type: Date, default: Date.now, index: true },
+  avatar: String,
+  messages: [{ type: Schema.Types.ObjectId, ref: 'Message'}],
 });
-groupSchema.statics.findByName = function(groupName) {
-  return this.findOne({ groupName }, 'groupName messages').exec();
+groupSchema.statics.getFullData = function(groupName) {
+  return this.findOne({ groupName })
+  .populate({
+    path: 'messages',
+    options: {
+      sort: { _id: -1 },
+    },
+    populate: {
+      path: 'user',
+      select: 'username avatar',
+    },
+  })
+  .exec();
+};
+groupSchema.statics.getSimpleData = function(groupName) {
+  return this.findOne({ groupName }).exec();
+};
+groupSchema.statics.getMessages = function(groupName, skip) {
+  return this.findOne({ groupName })
+  .populate({
+    path: 'messages',
+    options: {
+      sort: { _id: -1 },
+      limit: 15,
+      skip,
+    },
+    populate: {
+      path: 'user',
+      select: 'username avatar',
+    },
+  })
+  .exec();
 };
 
 module.exports = mongoose.model('Group', groupSchema);

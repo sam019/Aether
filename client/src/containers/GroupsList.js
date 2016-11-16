@@ -3,8 +3,9 @@ import GroupsList from '../components/GroupsList';
 
 function mapStateToProps(state) {
   return {
-    groups: state.get('groups') || [],
+    groups: state.get('groups'),
     currentGroup: state.get('currentGroup'),
+    username: state.getIn(['user', 'username']),
   };
 }
 

@@ -4,19 +4,32 @@ import Group from '../../containers/Group';
 
 const style = {
   flexGrow: 1,
-  overflow: 'none',
+  overflow: 'scroll',
 };
 
 export default function GroupsList(props) {
   const groups = [];
-  props.groups.forEach((group) => {
-    const groupName = group.get('groupName');
+  const username = props.username;
+  props.groups && props.groups.forEach((group) => {
+    const rawGroupName = group.get('groupName');
+    const match = rawGroupName.match(/(.*)&&(.*)/);
+    let groupName = rawGroupName;
+    let avatar = group.get('avatar');
+    if (match) {
+      const isLauncher = username === match[1];
+      const messages = group.get('messages');
+      if (!isLauncher || !avatar) {
+        avatar = messages.getIn([0, 'user', 'avatar']);
+      }
+      groupName = isLauncher ? match[2] : match[1];
+    }
     groups.push(
       <Group
-        key={groupName}
+        key={rawGroupName}
+        id={rawGroupName}
         groupName={groupName}
-        avatar={group.get('avatar')}
-        isSelected={props.currentGroup === groupName}
+        avatar={avatar}
+        isSelected={props.currentGroup === rawGroupName}
       />
     );
   });
@@ -29,4 +42,5 @@ export default function GroupsList(props) {
 GroupsList.propTypes = {
   groups: PropTypes.instanceOf(Immutable.List),
   currentGroup: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
 };

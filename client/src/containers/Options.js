@@ -1,14 +1,23 @@
 import { connect } from 'react-redux';
 import Options from '../components/Options';
+import joinGroup from '../actions/joinGroup';
+import changeUserInfo from '../actions/changeUserInfo';
+/* import switchNotification from '../actions/switchNotification';
+import switchSound from '../actions/switchSound'; */
 import logout from '../actions/logout';
 
-/* function mapStateToProps() {
-  // todo
-  return { a: 1 };
-} */
+function mapStateToProps(state) {
+  const user = state.get('user');
+  return {
+    allowNotification: user.get('allowNotification'),
+    allowSound: user.get('allowSound'),
+  };
+}
 
 const mapDispatchToProps = {
+  joinGroup,
+  changeUserInfo,
   logout,
 };
 
-export default connect(null, mapDispatchToProps)(Options);
+export default connect(mapStateToProps, mapDispatchToProps)(Options);

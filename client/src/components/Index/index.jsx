@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
+import { autobind } from 'core-decorators';
 import Profile from '../../containers/Profile';
 import GroupsList from '../../containers/GroupsList';
 import GroupInfo from '../../containers/GroupInfo';
@@ -6,17 +7,35 @@ import MessagesList from '../../containers/MessagesList';
 import InputArea from '../../containers/InputArea';
 import Styles from './Index.css';
 
-export default class Index extends Component {
+@autobind
+export default class Index extends PureComponent {
   componentDidMount() {
+    // 动画结束后，移除硬件加速，防止干扰fixed定位元素
+    this.sidebar.addEventListener('transitionend', this.handleTransition);
     this.rightBox.style.flexBasis = `${this.rightBox.clientWidth}px`;
-    this.props.initializeAndListening();
+  }
+  componentWillUpdate() {
+    // 动画开始时启用硬件加速
+    if (this.wrap.style.transform === '') {
+      this.wrap.style.transform = 'translateZ(0)';
+    }
+  }
+  componentWillUnmount() {
+    this.sidebar.removeEventListener('transitionend', this.handleTransition);
+  }
+  handleTransition() {
+    this.wrap.style.transform = '';
   }
   render() {
     return (
-      <div className={Styles.app}>
+      <div
+        className={Styles.wrap}
+        ref={(ele) => { this.wrap = ele; }}
+      >
         <div
           className={Styles.sidebar}
           style={{ marginLeft: this.props.showSidebar ? 0 : '-280px' }}
+          ref={(ele) => { this.sidebar = ele; }}
         >
           <Profile />
           <GroupsList />
@@ -29,19 +48,10 @@ export default class Index extends Component {
           <MessagesList />
           <InputArea />
         </div>
-        <div
-          style={{ display: !this.props.showMask && 'none' }}
-          className={Styles.mask}
-          onClick={() => {
-            this.props.maskClickHandle();
-            this.props.switchMask();
-          }}
-        />
       </div>
     );
   }
 }
 Index.propTypes = {
-  initializeAndListening: PropTypes.func.isRequired,
   showSidebar: PropTypes.bool.isRequired,
 };
