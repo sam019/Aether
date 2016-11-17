@@ -2,12 +2,10 @@
   "name": "client",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "vendor": "webpack --config webpack.dll.js",
     "build": "webpack --config webpack.prod.config.js --progress --colors",
-    "dev": "webpack-dev-server --devtool eval-source-map --progress --colors --inline --hot --host 0.0.0.0 --history-api-fallback --progress"
+    "start": "webpack-dev-server --devtool eval-source-map --progress --colors --inline --hot --host 0.0.0.0 --history-api-fallback --progress"
   },
   "author": "",
   "license": "ISC",

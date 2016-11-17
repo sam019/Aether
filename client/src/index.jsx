@@ -7,7 +7,6 @@ import App from './containers/App';
 import Index from './containers/Index';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
-// import './assets/base.css';
 import loginWithToken from './actions/loginWithToken';
 
 /* 登录验证 */
@@ -32,7 +31,7 @@ render(
   </Provider>,
   document.getElementById('app')
 );
-/* 重要！！！ 启用热替换 */
+/* 启用热替换 */
 if (module.hot) {
   module.hot.accept();
 }

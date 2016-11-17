@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import GroupInfo from '../components/GroupInfo';
 import switchSidebar from '../actions/switchSidebar';
+import leaveGroup from '../actions/leaveGroup';
 
 function mapStateToProps(state) {
   let groupName = state.get('currentGroup');
@@ -17,6 +18,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   switchSidebar,
+  leaveGroup,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupInfo);

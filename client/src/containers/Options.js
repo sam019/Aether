@@ -2,8 +2,6 @@ import { connect } from 'react-redux';
 import Options from '../components/Options';
 import joinGroup from '../actions/joinGroup';
 import changeUserInfo from '../actions/changeUserInfo';
-/* import switchNotification from '../actions/switchNotification';
-import switchSound from '../actions/switchSound'; */
 import logout from '../actions/logout';
 
 function mapStateToProps(state) {

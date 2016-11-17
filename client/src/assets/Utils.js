@@ -8,43 +8,6 @@ export const expressions = [
   '生气', '惊讶', '喷', '爱心', '心碎', '玫瑰', '礼物', '彩虹', '星星月亮', '太阳',
 ];
 
-function getURL(token, key, file, resolve, reject) {
-  // 七牛云
-  const body = new FormData();
-  body.append('token', token);
-  body.append('key', key);
-  body.append('file', file);
-  fetch('http://upload.qiniu.com/', {
-    method: 'POST',
-    body,
-  })
-  .then(res => res.json())
-  .then((json) => {
-    if (json.key) {
-      resolve(encodeURI(`http://oemazp8bp.bkt.clouddn.com/${json.key}`));
-    } else {
-      json.error === 'bad token' && sessionStorage.removeItem('uploadToken');
-      reject(json.error);
-    }
-  })
-  .catch(reject);
-  // sm.ms
-  /* const body = new FormData();
-  body.append('smfile', file);
-  const config = {
-    method: 'POST',
-    body,
-  };
-  return new Promise((resolve, reject) => {
-    fetch('https://sm.ms/api/upload', config)
-    .then(res => res.json())
-    .then((json) => {
-      json.code === 'success' ? resolve(json.data.url) : reject(json.message);
-    })
-    .catch(reject);
-  }); */
-}
-
 /**
  * 图片上传
  * @param  {[type]} key  [description]
@@ -53,14 +16,49 @@ function getURL(token, key, file, resolve, reject) {
  */
 export function uploadToCloud(key, file) {
   return new Promise((resolve, reject) => {
-    const token = sessionStorage.getItem('uploadToken');
-    if (!token) {
-      socket.emit('getUploadToken', (sign) => {
-        sessionStorage.setItem('uploadToken', sign);
-        getURL(sign, key, file, resolve, reject);
-      });
-    } else {
-      getURL(token, key, file, resolve, reject);
+    function getURL(token) {
+      // 七牛云
+      const body = new FormData();
+      body.append('token', token);
+      body.append('key', key);
+      body.append('file', file);
+      return fetch('http://upload.qiniu.com/', {
+        method: 'POST',
+        body,
+      })
+      .then(res => res.json());
     }
+    function uploader(count = 0) {
+      const newCount = count + 1;
+      function responseTreater(json) {
+        if (json.key) {
+          resolve(encodeURI(`http://oemazp8bp.bkt.clouddn.com/${json.key}`));
+        } else {
+          if (json.error === 'bad token') {
+            sessionStorage.removeItem('uploadToken');
+            if (newCount < 6) {
+              uploader(newCount);
+            } else {
+              reject(json.error);
+            }
+          }
+          reject(json.error);
+        }
+      }
+      const token = sessionStorage.getItem('uploadToken');
+      if (!token) {
+        socket.emit('getUploadToken', (sign) => {
+          sessionStorage.setItem('uploadToken', sign);
+          getURL(sign)
+          .then(responseTreater)
+          .catch(reject);
+        });
+      } else {
+        getURL(token)
+        .then(responseTreater)
+        .catch(reject);
+      }
+    }
+    uploader();
   });
 }

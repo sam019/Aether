@@ -14,12 +14,21 @@ export default function ChannelInfo(props) {
         />
       </button>
       <div className={Styles.title}>{props.groupName}{/*  ({props.count}) */}</div>
+      {props.groupName !== 'Aether' && (
+        <button
+          className={Styles.leave}
+          onClick={props.leaveGroup}
+        >
+          <i className={`iconfont icon-leave ${Styles.icon}`} />
+        </button>
+      )}
     </div>
   );
 }
 ChannelInfo.propTypes = {
   showSidebar: PropTypes.bool.isRequired,
   switchSidebar: PropTypes.func.isRequired,
+  leaveGroup: PropTypes.func.isRequired,
   groupName: PropTypes.string.isRequired,
   // count: PropTypes.string.isRequired,
 };

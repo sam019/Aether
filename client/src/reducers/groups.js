@@ -52,6 +52,9 @@ export default function(groups = fromJS([]), action) {
     case 'ADD_GROUP_INFO': {
       return groups.push(fromJS(payload));
     }
+    case 'LEAVE_GROUP': {
+      return groups.filter(group => group.get('groupName') !== payload);
+    }
     default: return groups;
   }
 }

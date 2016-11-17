@@ -35,20 +35,22 @@ export default class MessageList extends PureComponent {
         if (Notification.permission === 'default') {
           Notification.requestPermission();
         }
-        let icon;
+
         const newMessage = nextProps.messages.get(-1);
-        const username = newMessage.get('username');
-        nextProps.usersInfo.forEach((user) => {
-          if (user.get('username') === username) {
-            icon = user.get('avatar');
-          }
-        });
+        const user = newMessage.get('user');
+        const username = user.get('username');
+        let icon;
+        if (this.props.username !== username) {
+          icon = user.get('avatar');
+        } else {
+          icon = this.props.avatar;
+        }
         if (notiQue.length >= 3) {
           const noti = notiQue.shift();
           clearTimeout(noti.timeout);
           noti.close();
         }
-        const notification = new Notification(`${username}:`, {
+        const notification = new Notification(`${user.get('username')}:`, {
           icon,
           body: newMessage.get('type') === 'text' ? newMessage.get('content') : '[图片]',
         });

@@ -16,6 +16,13 @@
   width: 35px;
   height: 35px;
 }
+.leave {
+  position: absolute;
+  top: 6.25px;
+  right: 6.25px;
+  width: 35px;
+  height: 35px;
+}
 /* 图标 */
 .icon {
   display: block;
