@@ -30,6 +30,12 @@ io.on('connect', (socket) => {
   controller(socket);
 });
 
-server.listen(conf.PORT);
+let port;
+if (process.env.NODE_ENV === 'production') {
+  port = 80;
+} else {
+  port = conf.PORT;
+}
+server.listen(port);
 
-console.log(`listening on port: ${conf.PORT}`);
+console.log(`listening on port: ${port}`);
