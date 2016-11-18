@@ -7,11 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon lib/app.js --exec babel-node --presets stage-3",
     "build": "babel lib -d dist --presets stage-3",
-    "serve": "pm2 start dist/app.js --production"
+    "serve": "pm2 start dist/app.js NODE_ENV=production"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-cli": "^6.18.0",
     "babel-preset-stage-3": "^6.17.0",
     "jsonwebtoken": "^7.1.9",
     "koa": "^2.0.0-alpha.7",
