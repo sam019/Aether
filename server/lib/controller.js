@@ -16,8 +16,8 @@ const onlineUsers = {
       socket.join(group.groupName);
     }
     this.users.push(socket);
-    // console.log(`The user login: ${socket.username}`);
-    // console.log(`The current number of online: ${this.users.length}`);
+    console.log(`用户登录: ${socket.username}`);
+    console.log(`当前在线用户数量: ${this.users.length}`);
   },
   removeUser(socket) {
     if (this.users.includes(socket)) {
@@ -26,8 +26,8 @@ const onlineUsers = {
       }
       const index = this.users.indexOf(socket);
       this.users.splice(index, 1);
-      // console.log(`The user logout: ${socket.username}`);
-      // console.log(`The current number of online: ${this.users.length}`);
+      console.log(`用户登出: ${socket.username}`);
+      console.log(`当前在线用户数量: ${this.users.length}`);
       delete socket.username;
       delete socket.groups;
     }
@@ -159,7 +159,7 @@ module.exports =  function socketHandler(socket) {
       if (match) {
         const anotherUser = username === match[1] ? match[2] : match[1];
         const userSocket = onlineUsers.findUser(anotherUser);
-        if (!userSocket.groups.includes(groupName)) {
+        if (userSocket && !userSocket.groups.includes(groupName)) {
           onlineUsers.joinGroup(userSocket, groupName);
         }
       }
@@ -170,7 +170,7 @@ module.exports =  function socketHandler(socket) {
       delete message.groupName;
       message.user = user;
       const newMessage = await new Message(message).save();
-      const group = await Group.getFullData(groupName);
+      const group = await Group.getSimpleData(groupName);
       group.messages.push(newMessage);
       group.save();
     } catch (e) { console.log(e); }
@@ -188,6 +188,7 @@ module.exports =  function socketHandler(socket) {
     try {
       const group = await Group.getMessages(groupName, skip);
       const messages = group.messages;
+      console.log(messages.length);
       if (messages.length) {
         cb({
           success: true,

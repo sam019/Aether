@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Immutable from 'immutable';
 import Group from '../../containers/Group';
+import roomURL from '../../assets/default_room.png';
 
 const style = {
   flexGrow: 1,
@@ -14,7 +15,7 @@ export default function GroupsList(props) {
     const rawGroupName = group.get('groupName');
     const match = rawGroupName.match(/(.*)&&(.*)/);
     let groupName = rawGroupName;
-    let avatar = group.get('avatar');
+    let avatar = roomURL;
     if (match) {
       const isLauncher = username === match[1];
       const messages = group.get('messages');

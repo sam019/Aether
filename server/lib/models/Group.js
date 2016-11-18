@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const groupSchema = new Schema({
   groupName: { type: String, unique: true },
-  avatar: String,
+  // avatar: String,
   messages: [{ type: Schema.Types.ObjectId, ref: 'Message'}],
 });
 groupSchema.statics.getFullData = function(groupName) {
@@ -12,6 +12,7 @@ groupSchema.statics.getFullData = function(groupName) {
     path: 'messages',
     options: {
       sort: { _id: -1 },
+      limit: 30,
     },
     populate: {
       path: 'user',

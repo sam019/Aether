@@ -73,7 +73,7 @@ export default class Login extends PureComponent {
           <i className={`iconfont icon-password ${Styles.icon}`} />
           <input
             id="loginPassword"
-            type="text"
+            type="password"
             className={Styles.input}
             placeholder="password"
             onChange={this.syncPassword}

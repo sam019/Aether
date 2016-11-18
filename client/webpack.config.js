@@ -17,7 +17,7 @@ module.exports = {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[local]-[hash:base64:5]!postcss',
     }, {
-      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)\??.*$/,
+      test: /\.(png|jpg|jpeg|gif)\??.*$/,
       loader: 'url?limit=8192',
       // url-loader是对file-loader的封装
       // 功能是将小图片转为base64格式
@@ -41,9 +41,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      favicon: './src/assets/favicon.ico',
       title: 'Aether',
       template: './src/assets/index.ejs',
       inject: 'body',
+      hash: true,
     }),
   ],
 };

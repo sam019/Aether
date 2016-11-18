@@ -1,6 +1,10 @@
 const Koa = require('koa');
+const logger = require('koa-logger');
+const gzip = require('koa-gzip');
 const serve = require('koa-static');
 const convert = require('koa-convert');
+const etag = require('koa-etag');
+const path = require('path');
 
 const app = new Koa();
 const server = require('http').createServer(app.callback());
@@ -12,7 +16,10 @@ const conf = require('./conf');
 mongoose.Promise = Promise;
 mongoose.connect(conf.DATABASE);
 
-app.use(convert(serve(__dirname + '/../public')));
+app.use(logger());
+app.use(convert(gzip()));
+app.use(etag());
+app.use(convert(serve(path.join(__dirname, '../public'))));
 app.use((ctx) => {
   if (ctx.path !== '/') {
     ctx.redirect('/');
@@ -23,4 +30,6 @@ io.on('connect', (socket) => {
   controller(socket);
 });
 
-server.listen(conf.PORT, () => { console.log(`listening on port: ${conf.PORT}`); });
+server.listen(conf.PORT);
+
+console.log(`listening on port: ${conf.PORT}`);

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Styles from './GroupInfo.css';
 
-export default function ChannelInfo(props) {
+export default function GroupInfo(props) {
   return (
     <div className={Styles.header}>
       <button
@@ -25,7 +25,7 @@ export default function ChannelInfo(props) {
     </div>
   );
 }
-ChannelInfo.propTypes = {
+GroupInfo.propTypes = {
   showSidebar: PropTypes.bool.isRequired,
   switchSidebar: PropTypes.func.isRequired,
   leaveGroup: PropTypes.func.isRequired,

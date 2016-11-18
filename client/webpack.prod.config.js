@@ -52,9 +52,15 @@ module.exports = {
       root: path.join(__dirname, '../server'),
     }),
     new HtmlWebpackPlugin({
+      favicon: './src/assets/favicon.ico',
       title: 'Aether',
       template: './src/assets/index.ejs',
       inject: 'body',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+      },
+      hash: true,
     }),
     new ExtractTextPlugin('style_[contenthash:8].css'),
     new webpack.DefinePlugin({
