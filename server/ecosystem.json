@@ -1,0 +1,12 @@
+{
+  "apps": [
+    {
+      "name": "Aether",
+      "script": "./dist/app.js",
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "watch": true
+    }
+  ]
+}

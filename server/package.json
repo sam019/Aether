@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon lib/app.js --exec babel-node --presets stage-3",
     "build": "babel lib -d dist --presets stage-3",
-    "serve": "NODE_ENV=production pm2 start dist/app.js"
+    "serve": "pm2 start ecosystem.json"
   },
   "author": "",
   "license": "ISC",
