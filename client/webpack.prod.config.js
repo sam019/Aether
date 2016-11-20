@@ -60,7 +60,6 @@ module.exports = {
         removeComments: true,
         collapseWhitespace: true,
       },
-      hash: true,
     }),
     new ExtractTextPlugin('style_[contenthash:8].css'),
     new webpack.DefinePlugin({

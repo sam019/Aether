@@ -45,7 +45,6 @@ module.exports = {
       title: 'Aether',
       template: './src/assets/index.ejs',
       inject: 'body',
-      hash: true,
     }),
   ],
 };
