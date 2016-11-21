@@ -1,6 +1,6 @@
 # Aether
 
-[在线聊天室](aether.liangsen.tk)
+[在线聊天室](http://aether.liangsen.tk)
 
 ## 特性
 * 前后端分离开发
