@@ -89,7 +89,7 @@ export default class Options extends PureComponent {
           <li>
             <a
               className={`${Styles.option}`}
-              href="https://github.com/oddTick/Aether"
+              href="https://github.com/sam019/Aether"
               target="_blank"
               rel="noopener noreferrer"
             >
