@@ -5,7 +5,7 @@
 ## 特性
 * 前后端分离开发
 * 前端react，包括react，redux，react-router，immutablejs
-* 后端koa2
+* 后端koa2, mongodb
 * 使用socket.io做消息推送
 
 ## 基础功能

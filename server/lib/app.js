@@ -15,7 +15,6 @@ const conf = require('./conf');
 mongoose.Promise = Promise;
 mongoose.connect(conf.DATABASE);
 
-
 process.env.NODE_ENV !== 'production' && app.use(logger());
 app.use(async (ctx, next) => {
   await next();
