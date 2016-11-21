@@ -21,7 +21,7 @@
     npm install --production  //安装前端依赖
     npm run build //编译并打包前端
     cd ../server
-    npm install --production //安装后端端依赖
+    npm install --production //安装后端依赖
     npm run build //编译后端
     npm run server //开启server
 
