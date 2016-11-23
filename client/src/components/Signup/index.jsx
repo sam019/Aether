@@ -84,7 +84,7 @@ export default class Signup extends PureComponent {
           value="注册"
           onClick={this.handleSignup}
         />
-        <Link className={Styles.link} to="/login">已有账号？立即登录</Link>
+        <Link className={Styles.link} to="/login">已有账号</Link>
       </div>
     );
   }

@@ -1,12 +1,8 @@
 import React, { PropTypes } from 'react';
 import Immutable from 'immutable';
 import Group from '../../containers/Group';
+import Styles from './GroupsList.css';
 import roomURL from '../../assets/default_room.png';
-
-const style = {
-  flexGrow: 1,
-  overflow: 'scroll',
-};
 
 export default function GroupsList(props) {
   const groups = [];
@@ -35,7 +31,7 @@ export default function GroupsList(props) {
     );
   });
   return (
-    <div style={style}>
+    <div className={Styles.wrap}>
       {groups}
     </div>
   );

@@ -1,0 +1,7 @@
+.wrap {
+  flex: 1 0 0;
+  overflow: scroll;
+}
+.wrap::-webkit-scrollbar {
+  display: none;
+}

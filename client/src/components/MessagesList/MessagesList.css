@@ -3,7 +3,15 @@
   flex-grow: 1;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 0 10px;
+}
+.wrap::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+.wrap::-webkit-scrollbar-thumb {
+  width: 5px;
+  border-radius: 2.5px;
+  background-color: #999;
 }
 .loading {
   position: absolute;

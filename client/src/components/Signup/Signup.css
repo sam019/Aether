@@ -50,6 +50,7 @@
   flex: 1 1 0;
   width: 0;
   height: 40px;
+  padding-left: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
   margin: 3px 0 3px 10px;
@@ -69,6 +70,7 @@
   height: 40px;
   background-color: #69c;
   border-radius: 10px;
+  color: #fff;
 }
 .link {
   margin-top: 10px;
