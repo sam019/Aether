@@ -34,6 +34,6 @@ io.on('connect', (socket) => {
   controller(socket);
 });
 
-server.listen(conf.port);
+server.listen(conf.PORT);
 
-console.log(`listening on port: ${conf.port}`);
+console.log(`listening on port: ${conf.PORT}`);
