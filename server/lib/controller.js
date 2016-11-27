@@ -6,51 +6,53 @@ const Message = require('./models/Message');
 const conf = require('./conf');
 
 // 在线用户
-const onlineUsers = {
-  users: [],
-  addUser(socket, user) {
-    socket.username = user.username;
-    socket.groups = [];
-    for (const group of user.groups) {
-      socket.groups.push(group.groupName);
-      socket.join(group.groupName);
-    }
-    this.users.push(socket);
-    console.log(`用户登录: ${socket.username}`);
-    console.log(`当前在线用户数量: ${this.users.length}`);
-  },
-  removeUser(socket) {
-    if (this.users.includes(socket)) {
-      for (const group of socket.groups) {
-        socket.leave(group);
+const onlineUsers = (() => {
+  const users = [];
+  return {
+    addUser(socket, user) {
+      socket.username = user.username;
+      socket.groups = [];
+      for (const group of user.groups) {
+        socket.groups.push(group.groupName);
+        socket.join(group.groupName);
       }
-      const index = this.users.indexOf(socket);
-      this.users.splice(index, 1);
-      console.log(`用户登出: ${socket.username}`);
-      console.log(`当前在线用户数量: ${this.users.length}`);
-      delete socket.username;
-      delete socket.groups;
-    }
-  },
-  joinGroup(socket, groupName) {
-    socket.groups.push(groupName);
-    socket.join(groupName);
-  },
-  leaveGroup(socket, groupName) {
-    const index = socket.groups.indexOf(groupName);
-    socket.groups.splice(index, 1);
-    socket.leave(groupName);
-  },
-  findUser(username) {
-    for (const user of this.users) {
-      if (user.username === username) {
-        return user;
+      users.push(socket);
+      console.log(`用户登录: ${socket.username}`);
+      console.log(`当前在线用户数量: ${users.length}`);
+    },
+    removeUser(socket) {
+      if (users.includes(socket)) {
+        for (const group of socket.groups) {
+          socket.leave(group);
+        }
+        const index = users.indexOf(socket);
+        users.splice(index, 1);
+        console.log(`用户登出: ${socket.username}`);
+        console.log(`当前在线用户数量: ${users.length}`);
+        delete socket.username;
+        delete socket.groups;
       }
-    }
-  }
-};
+    },
+    joinGroup(socket, groupName) {
+      socket.groups.push(groupName);
+      socket.join(groupName);
+    },
+    leaveGroup(socket, groupName) {
+      const index = socket.groups.indexOf(groupName);
+      socket.groups.splice(index, 1);
+      socket.leave(groupName);
+    },
+    findUser(username) {
+      for (const user of users) {
+        if (user.username === username) {
+          return user;
+        }
+      }
+    },
+  };
+})();
 
-module.exports =  function socketHandler(socket) {
+module.exports = function socketHandler(socket) {
   /* 首次启动创建主群 */
   Group.getSimpleData('Aether').then((Aether) => {
     if (!Aether) {
