@@ -4,7 +4,7 @@
 
 ## 特性
 * 前后端分离开发
-* 前端react，包括react，redux，react-router，immutablejs
+* 前端react，包括react，redux，react-router，Immutable
 * 后端koa, mongodb
 * 使用socket.io做消息推送
 
