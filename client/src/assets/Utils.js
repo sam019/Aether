@@ -35,8 +35,8 @@ export function uploadToCloud(key, file) {
           resolve(encodeURI(`http://oemazp8bp.bkt.clouddn.com/${json.key}`));
         } else {
           if (json.error === 'bad token') {
-            sessionStorage.removeItem('uploadToken');
-            if (newCount < 6) {
+            localStorage.removeItem('uploadToken');
+            if (newCount < 3) {
               uploader(newCount);
             } else {
               reject(json.error);
@@ -45,10 +45,10 @@ export function uploadToCloud(key, file) {
           reject(json.error);
         }
       }
-      const token = sessionStorage.getItem('uploadToken');
+      const token = localStorage.getItem('uploadToken');
       if (!token) {
         socket.emit('getUploadToken', (sign) => {
-          sessionStorage.setItem('uploadToken', sign);
+          localStorage.setItem('uploadToken', sign);
           getURL(sign)
           .then(responseTreater)
           .catch(reject);

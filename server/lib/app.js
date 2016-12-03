@@ -24,7 +24,7 @@ app.use(async (ctx, next) => {
     ctx.status = 304;
   }
 });
-app.use(etag());
+app.use(etag({ weak: false }));
 app.use(convert(serve(path.join(__dirname, '/../public'), { maxAge: 1000 * 60 * 60 * 24 })));
 app.use((ctx) => {
   if (ctx.path !== '/') {
