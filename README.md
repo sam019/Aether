@@ -23,7 +23,7 @@
     cd ../server
     npm install --production //安装后端依赖
     npm run build //编译后端
-    npm run server //开启server
+    npm run serve //开启server
 
 ## tips:
 1. node.js的版本是v6.x
