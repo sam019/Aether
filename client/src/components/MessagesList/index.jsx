@@ -127,7 +127,7 @@ export default class MessageList extends PureComponent {
         />
         {messages}
         <audio
-          src="../../assets/note.mp3"
+          src="http://oemazp8bp.bkt.clouddn.com/note.mp3"
           style={{ display: 'none' }}
           ref={(ele) => { this.sound = ele; }}
         />
