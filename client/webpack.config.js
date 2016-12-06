@@ -17,7 +17,7 @@ module.exports = {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[local]-[hash:base64:5]!postcss',
     }, {
-      test: /\.(png|jpg|jpeg|gif)\??.*$/,
+      test: /\.(png|jpg|jpeg|gif|mp3|wav)\??.*$/,
       loader: 'url?limit=8192',
       // url-loader是对file-loader的封装
       // 功能是将小图片转为base64格式
