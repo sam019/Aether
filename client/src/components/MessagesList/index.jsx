@@ -32,7 +32,7 @@ export default class MessageList extends PureComponent {
       document.hidden
     ) {
       if (Notification && nextProps.allowNotification) {
-        if (Notification.permission === 'default') {
+        if (Notification.permission !== 'granted') {
           Notification.requestPermission();
         }
 
@@ -127,7 +127,7 @@ export default class MessageList extends PureComponent {
         />
         {messages}
         <audio
-          src="http://101.96.8.164/data3.huiyi8.com/2014/lxy/05/14/10.mp3"
+          src="../../assets/note.mp3"
           style={{ display: 'none' }}
           ref={(ele) => { this.sound = ele; }}
         />
