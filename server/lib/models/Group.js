@@ -30,7 +30,7 @@ groupSchema.statics.getMessages = function(groupName, skip) {
     path: 'messages',
     options: {
       sort: { _id: -1 },
-      limit: 15,
+      limit: 30,
       skip,
     },
     populate: {

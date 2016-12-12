@@ -4,3 +4,4 @@ client/build
 server/public
 server/dist
 line.select
+**/*/.DS_Store
