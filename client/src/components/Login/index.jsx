@@ -9,9 +9,7 @@ export default class Login extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
-      showErr: false,
+      showErr: false
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -25,16 +23,10 @@ export default class Login extends PureComponent {
       this.timeout = setTimeout(() => { this.setState({ showErr: false }); }, 2000);
     }
   }
-  syncUsername(e) {
-    this.setState({ username: e.target.value });
-  }
-  syncPassword(e) {
-    this.setState({ password: e.target.value });
-  }
   handleLogin() {
     this.props.login({
-      username: this.state.username.trim(),
-      password: this.state.password.trim(),
+      username: this.username.value.trim(),
+      password: this.password.value.trim(),
     });
   }
   render() {
@@ -58,12 +50,11 @@ export default class Login extends PureComponent {
         >
           <i className={`iconfont icon-username ${Styles.icon}`} />
           <input
+            ref={(ele) => { this.username = ele; }}
             id="loginUsername"
             type="text"
             className={Styles.input}
             placeholder="username"
-            onChange={this.syncUsername}
-            value={this.state.username}
           />
         </label>
         <label
@@ -72,12 +63,11 @@ export default class Login extends PureComponent {
         >
           <i className={`iconfont icon-password ${Styles.icon}`} />
           <input
+            ref={(ele) => { this.password = ele; }}
             id="loginPassword"
             type="password"
             className={Styles.input}
             placeholder="password"
-            onChange={this.syncPassword}
-            value={this.state.password}
           />
         </label>
         <input
