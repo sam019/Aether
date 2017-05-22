@@ -1,12 +1,10 @@
 # Aether
 
-[在线聊天室](http://aether.liangsen.tk)
-
-## 特性
+## 技术栈
 * 前后端分离开发
-* 前端react，包括react，redux，react-router，Immutable
-* 后端koa, mongodb
-* 使用socket.io做消息推送
+* 前端使用react全家桶，包括react-router，redux，Immutablejs
+* 后端使用Node.js开发，基于koa框架, MongoDB数据库
+* 使用websocket做消息推送
 
 ## 基础功能
 * 注册登录、创建和加入群组、发起私聊、历史消息
@@ -17,16 +15,15 @@
 
 ## 安装
     git clone https://github.com/sam019/Aether.git
-    cd Aether/client
-    npm install --production  //安装前端依赖
-    npm run build //编译并打包前端
-    cd ../server
-    npm install --production //安装后端依赖
-    npm run build //编译后端
-    npm run serve //开启server
+    cd Aether/client // 前端目录
+    npm install
+    npm run build
+    cd ../server // 后端目录
+    npm install
+    npm run build
+    npm run serve // 开启服务器
 
 ## tips:
-1. node.js的版本是v6.x
-2. mongodb服务运行在默认的27017端口。
-3. 生产环境默认监听80端口。
-4. 启动需要pm2。
+1. Node.js的版本不低于v6.x
+2. MongoDB服务需要运行在默认的27017端口，也可以在后端配置文件server/lib/conf.js中修改
+4. 部署需要pm2

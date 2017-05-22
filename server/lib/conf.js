@@ -6,4 +6,4 @@ exports.EXPIRED_SECONDS = 60 * 60 * 24 * 7;
 exports.BUCKET = 'aether';
 exports.AVATAR = '';
 
-exports.DATABASE = 'mongodb://localhost/im';
+exports.DATABASE = 'mongodb://localhost/im'; // 数据库服务
